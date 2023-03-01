@@ -113,19 +113,20 @@ export default function DiputadosForm(){
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       />
                     </div>
-
                     <div className="relative w-full mb-3">
                       <label
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Cargo para el que postula
+                        Genero
                       </label>
-                      <input
-                        type="text"
+                      <select
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Email"
-                      />
+                      >
+                        <option value="" >Hombre </option>
+                        <option value="" >Mujer </option>
+                        <option value="" >No binario </option>
+                      </select>
                     </div>
                     <div className="relative w-full mb-3">
                       <label
@@ -137,7 +138,7 @@ export default function DiputadosForm(){
                       <input
                         type="email"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Email"
+                        placeholder="Seleccionar"
                       />
                     </div>
   
@@ -146,12 +147,12 @@ export default function DiputadosForm(){
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Email
+                        Grupo parlamentario
                       </label>
                       <input
                         type="email"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Email"
+                        placeholder="Grupo parlamentario"
                       />
                     </div>
   
@@ -160,12 +161,12 @@ export default function DiputadosForm(){
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Password
+                        Inserte archivos
                       </label>
                       <input
-                        type="password"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        placeholder="Password"
+                        type="file"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-1/2 ease-linear transition-all duration-150"
+                        placeholder="Seleccione archivos"
                       />
                     </div>
   
