@@ -1,0 +1,196 @@
+[
+    {
+        "estado": "AGUASCALIENTES",
+        "id": 1,
+        "mapa":"/img/estados/mapaAC.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "BAJA CALIFORNIA",
+        "id": 2,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "BAJA CALIFORNIA SUR",
+        "id": 3,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "CAMPECHE",
+        "id": 4,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "COAHUILA",
+        "id": 5,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "COLIMA",
+        "id": 6,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "CHIAPAS",
+        "id": 7,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "CHIHUAHUA",
+        "id": 8,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "CIUDAD DE MEXICO",
+        "id": 9,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "DURANGO",
+        "id": 10,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "GUANAJUATO",
+        "id": 11,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "GUERRERO",
+        "id": 12,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "HIDALGO",
+        "id": 13,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "JALISCO",
+        "id": 14,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "MEXICO",
+        "id": 15,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "MICHOACAN",
+        "id": 16,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "MORELOS",
+        "id": 17,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "NAYARIT",
+        "id": 18,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "NUEVO LEON",
+        "id": 19,
+        "mapa":"/img/estados/mapaNL.png",
+        "logo": "/img/estados/NuevoL.svg"
+    },
+    {
+        "estado": "OAXACA",
+        "id": 20,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "PUEBLA",
+        "id": 21,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "QUERETARO",
+        "id": 22,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "QUINTANA ROO",
+        "id": 23,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "SAN LUIS POTOSÍ",
+        "id": 24,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "SINALOA",
+        "id": 25,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "SONORA",
+        "id": 26,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "TABASCO",
+        "id": 27,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "TAMAULIPAS",
+        "id": 28,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "TLAXCALA",
+        "id": 29,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "VERACRUZ",
+        "id": 30,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "YUCATAN",
+        "id": 31,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    },
+    {
+        "estado": "ZACATECAS",
+        "id": 32,
+        "mapa":"/img/mapaNL.png",
+        "logo": "/img/NuevoL.svg"
+    }    
+
+   
+]
