@@ -9,6 +9,7 @@ import PreSaveView from "@/components/Form/PreSaveView";
 import PPPNSelect from "@/components/Form/PPNSelect";
 import DistritosLocalesTable from "@/components/Table/DistritosLocalesTable";
 import DistritosFederalesTable from "@/components/Table/DistritosFederalesTable";
+import SelectEstados from "@/components/Form/SelectEstados";
 export default function Home() {
   const [Federal, setFederal] = useState("");
   const [CandidaturaTipo, setCandidatura] = useState("");
@@ -18,7 +19,7 @@ export default function Home() {
   const [estadoSeleccionado, setEstado] = useState("");
   const [checkAllStates, setAllStates] = useState(false);
   const [checkAllStatesArr, setAllStatesArr] = useState([]);
-  const [preview, setPreview] = useState(true);
+  const [preview, setPreview] = useState(false);
   const [arrMunicipios, setMunicipios] = useState([]);
   const [PPNSeleccionados, setPPNSeleccionados] = useState([]);
   const [distritosLocales, setDistritosLocales] = useState([]);
@@ -40,47 +41,35 @@ export default function Home() {
   };
   useEffect(() => {
     getPPN();
-    setCandidatura("");
-    setCompetencia("");
-    setPPN([]);
-    setDistritos([]);
-    setEstado([]);
-    setPreview(false);
-    setMunicipios([]);
-    setAllStates(false);
-    setDistritosLocales([]);
-    setPNNLOCALES([]);
-    setDistritosEliminados([]);
-    setPPNSeleccionados([]);
-    setCoalicion({
-      nombre: "",
-      Abrev: "",
-    });
-    resetArr();
   }, [Federal]);
 
   const onClickCheckAllStates = () => {
     var x;
     x = !checkAllStates;
     setAllStates(x);
-    fetch("http://localhost:3002/api/distritos/get/id?id=100")
-      .then((data) => data.json())
-      .then((data) => {
-        console.log(data);
-        var arr = [...arrDistritos];
-        for (var i = 0; i < data.length; i++) {
-          arr = [...arr, data[i]];
-        }
-        console.log("arreglo", arr);
-        setDistritos(arr);
-      });
-
-    var arrFalse = [];
-    for (var i = 0; i < 32; i++) {
-      arrFalse = [...arrFalse, true];
+    if (checkAllStates == true) {
+      console.log("ELIMINAR DISTRITOS");
+      setDistritos([]);
     }
-    setAllStatesArr(arrFalse);
-    console.log(checkAllStatesArr);
+    if (checkAllStates == false) {
+      var arrFalse = [];
+      for (var i = 0; i < 32; i++) {
+        arrFalse = [...arrFalse, true];
+      }
+      setAllStatesArr(arrFalse);
+      console.log(checkAllStatesArr);
+      fetch("http://localhost:3002/api/distritos/get/id?id=100")
+        .then((data) => data.json())
+        .then((data) => {
+          console.log(data);
+          var arr = [...arrDistritos];
+          for (var i = 0; i < data.length; i++) {
+            arr = [...arr, data[i]];
+          }
+          console.log("arreglo", arr);
+          setDistritos(arr);
+        });
+    }
   };
   const onChangeFederal = (e) => {
     const newValue = e.target.value;
@@ -385,42 +374,16 @@ export default function Home() {
                 <>
                   {PPNSeleccionados.length > 1 ? (
                     <>
-                      <div
-                        id="select Estados"
-                        className="border block text-xs w-full p-2 rounded border-2 mt-4"
-                      >
-                        <div className="items-center justify-center flex">
-                          <h2 className="font-bold my-1.5 ">
-                            SELECCIONAR ESTADOS
-                          </h2>
-                          <div className="text-xs ml-auto">
-                            <label className="mr-2">SELECCIONAR TODOS:</label>
-                            <input
-                              type={"checkbox"}
-                              name="selctAllStates"
-                              value={checkAllStates}
-                              onClick={() => {
-                                onClickCheckAllStates();
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-5">
-                          {arrEstados.map((e, index) => {
-                            return (
-                              <div key={e.estado} className="my-1">
-                                <input
-                                  onClick={(e) => onClickEstado(e, index)}
-                                  type="checkbox"
-                                  className="mx-1"
-                                  checked={checkAllStatesArr[index]}
-                                />
-                                <label className="ml-1">{e.estado}</label>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
+                      <SelectEstados
+                        PPNSeleccionados={PPNSeleccionados}
+                        onClickCheckAllStates={onClickCheckAllStates}
+                        onClickEstado={onClickEstado}
+                        arrEstados={arrEstados}
+                        num={Competencia == "C" ? 1 : 0}
+                        checkAllStates={checkAllStates}
+                        checkAllStatesArr={checkAllStates}
+                        setDistritos={setDistritos}
+                      />
                     </>
                   ) : (
                     <></>
@@ -488,7 +451,11 @@ export default function Home() {
             <></>
           )}
 
-        <DistritosFederalesTable arrDistritos={arrDistritos} onClickEliminar={onClickEliminar} arrEstados={arrEstados}/ >
+          <DistritosFederalesTable
+            arrDistritos={arrDistritos}
+            onClickEliminar={onClickEliminar}
+            arrEstados={arrEstados}
+          />
           <DistritosLocalesTable
             distritosLocales={distritosLocales}
             CandidaturaTipo={CandidaturaTipo}

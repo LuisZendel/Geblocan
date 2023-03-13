@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCheck, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PreSaveView({
   arrDistritos,
@@ -13,6 +13,30 @@ export default function PreSaveView({
 }) {
   const [serchSelect, setSerchSelect] = useState("");
   const [serchNotSelect, setSerchNotSelect] = useState("");
+  const [contadorEntidadesSelect, setContador] = useState(0)
+  const [contadorEntidadesNotSelect, setContadorNot] = useState(0)
+
+  useEffect(()=>{
+    setContador(SearchEntidades(arrDistritos))
+    setContadorNot(SearchEntidades(arrDistritosEliminados))
+  },[arrDistritos,arrDistritosEliminados])
+  
+  const SearchEntidades = (arr) => {
+    var arreglo = []
+    arreglo = [... arr]
+    var contador = 0;
+    for(var i=1; i<=32; i++){
+      for(var j=0; j<arr.length; j++ ){
+        if(arreglo[j].IDED == i){
+          console.log("numero entidades")
+          console.log(arreglo[j].IDED, j)
+          contador ++
+          break
+        }
+      }
+    }
+    return contador 
+  }
   const filter = (e) => {
     var text = e.target.value;
     setSerchSelect(text);
@@ -38,7 +62,7 @@ export default function PreSaveView({
             <h1>SELECCIONADOS</h1>
           </div>
           <div className="text-xs p-2">
-            <p>NUMERO DE ENTIDADES: {contadorEntidadesSeleccionadas} </p>
+            <p>NUMERO DE ENTIDADES: {contadorEntidadesSelect} </p>
           </div>
           <div className="text-xs p-2">
             <p>NUMERO DE DISTRITOS FEDERALES: {arrDistritos.length}</p>
@@ -72,7 +96,7 @@ export default function PreSaveView({
             </thead>
             <tbody>
               {arrDistritos
-                .filter((e, index) => {
+                .filter((e) => {
                   const NOMBRE = e.NESTADO.toUpperCase();
                   const NOMBREBUSCADOR = serchSelect.toUpperCase();
                   return !NOMBRE.indexOf(NOMBREBUSCADOR);
@@ -97,8 +121,8 @@ export default function PreSaveView({
                       <td className="px-4 ">{x.CABECERA}</td>
                       <td className="px-4 content-center justify-center flex">
                         <button
-                          onClick={(e, index) => {
-                            onClickEliminar(e, index);
+                          onClick={(e) => {
+                            onClickEliminar(x, index);
                           }}
                         >
                           <FontAwesomeIcon icon={faTrash} />
@@ -115,7 +139,7 @@ export default function PreSaveView({
             <h1>NO SELECCIONADOS</h1>
           </div>
           <div className="text-xs p-2">
-            <p>NUMERO DE ENTIDADES: {32 - contadorEntidadesSeleccionadas} </p>
+            <p>NUMERO DE ENTIDADES: {contadorEntidadesNotSelect} </p>
           </div>
           <div className="text-xs p-2">
             <p>NUMERO DE DISTRITOS FEDERALES: {300 - arrDistritos.length}</p>

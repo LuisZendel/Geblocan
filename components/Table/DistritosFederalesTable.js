@@ -1,16 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function DistritosFederalesTable({
   arrDistritos,
   onClickEliminar,
   arrEstados,
 }) {
+    useEffect(()=>{
+        setContador(SearchEntidades(arrDistritos))
+      },[arrDistritos])
   const [serch, setSerch] = useState("");
+  const [contadorEntidadesSelect, setContador] = useState(0)
+
   const filter = (e) => {
     var text = e.target.value;
     setSerch(text);
   };
+  const SearchEntidades = (arr) => {
+    var arreglo = []
+    arreglo = [... arr]
+    var contador = 0;
+    for(var i=1; i<=32; i++){
+      for(var j=0; j<arr.length; j++ ){
+        if(arreglo[j].IDED == i){
+          console.log("numero entidades")
+          console.log(arreglo[j].IDED, j)
+          contador ++
+          break
+        }
+      }
+    }
+    return contador 
+  }
   return (
     <>
       {arrDistritos.length > 1 ? (
@@ -23,6 +44,12 @@ export default function DistritosFederalesTable({
               <h2 className="font-bold my-1.5 ">SELECCIONAR DISTRITOS</h2>
             </div>
             <div className=" mb-2  ml-auto flex content-center ">
+              <div className="text-xs p-2">
+                <p>NUMERO DE ENTIDADES: {contadorEntidadesSelect} </p>
+              </div>
+              <div className="text-xs p-2">
+                <p>NUMERO DE DISTRITOS FEDERALES: {arrDistritos.length}</p>
+              </div>
               <FontAwesomeIcon icon={faSearch} className="text-sm ml-auto" />
               <input
                 className="rounded border-solid border-2 h-5 "
