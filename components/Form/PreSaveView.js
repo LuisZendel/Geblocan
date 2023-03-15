@@ -8,7 +8,6 @@ export default function PreSaveView({
   arrEstados,
   onClickEliminar,
   onClickInsertDistrito,
-  contadorEntidadesSeleccionadas,
   setPreview,
 }) {
   const [serchSelect, setSerchSelect] = useState("");
@@ -96,7 +95,7 @@ export default function PreSaveView({
             </thead>
             <tbody>
               {arrDistritos
-                .filter((e) => {
+                .filter((e, index) => {
                   const NOMBRE = e.NESTADO.toUpperCase();
                   const NOMBREBUSCADOR = serchSelect.toUpperCase();
                   return !NOMBRE.indexOf(NOMBREBUSCADOR);
@@ -122,7 +121,10 @@ export default function PreSaveView({
                       <td className="px-4 content-center justify-center flex">
                         <button
                           onClick={(e) => {
-                            onClickEliminar(x, index);
+                            console.log("boton eliminar")
+                            console.log(x.IDSAB2023)
+                            var numero = x.IDSAB2023
+                            onClickEliminar( numero, index);
                           }}
                         >
                           <FontAwesomeIcon icon={faTrash} />

@@ -106,7 +106,10 @@ export default function DistritosFederalesTable({
                             <td className="px-4 content-center justify-center flex">
                               <button
                                 onClick={(e, index) => {
-                                  onClickEliminar(e, index);
+                                  console.log("boton eliminar")
+                                  console.log(x.IDSAB2023)
+                                  var numero = x.IDSAB2023
+                                  onClickEliminar(numero, index);
                                 }}
                               >
                                 <FontAwesomeIcon icon={faTrash} />

@@ -1,10 +1,17 @@
+import { useState } from "react";
+
 export default function PPPNSelect({
   insertPPNSeleccionados,
   arrPPN,
   arrPPNLOCALES,
   Competencia,
+  PPNSeleccionados,
+  setPPNView,
+  View
 }) {
+  useState(()=>{},[])
   return (
+    <>{ View ? 
     <div
       id="select PPN"
       className="border block text-xs w-full p-2 rounded border-2 mt-4"
@@ -27,6 +34,7 @@ export default function PPPNSelect({
                     name="PPN"
                     type={Competencia == "S" ? "radio" : "checkbox"}
                     className="mx-1"
+                    value={e.Abrev}
                   />
                   <label className="ml-1">{e.Abrev}</label>
                 </div>
@@ -50,6 +58,15 @@ export default function PPPNSelect({
       ) : (
         <></>
       )}
-    </div>
+               <button
+                className="w-24 bg-blue-700 rounded h-6 text-white ml-auto mt-1"
+                onClick={() => {
+                  setPPNView(false);
+                }}
+              >
+                Aceptar
+              </button>
+    </div> : <></>}
+    </>
   );
 }
