@@ -34,8 +34,8 @@ export default function Home() {
   const [candidaturaView, setCandidaturaView] = useState(false);
   const [competenciaView, setCompetenciaView] = useState(false);
   const [guadarValue, setGuardar] = useState(false);
-  const [nombreEscenario, setNombreEscenario] = useState("")
-  const [descripcionEscenario, setDescripcion] = useState("")
+  const [nombreEscenario, setNombreEscenario] = useState("");
+  const [descripcionEscenario, setDescripcion] = useState("");
   const [Coalicion, setCoalicion] = useState({
     nombre: "",
     Abrev: "",
@@ -361,24 +361,47 @@ export default function Home() {
 
   const guardarConfiguracion = () => {
     const Escenario = {
-        Nombre: nombreEscenario,
-        Descripcion: descripcionEscenario,
-        Federal: Federal,
-        CandidaturaTipo: CandidaturaTipo,
-        Competencia: Competencia,
-        Coalicion: Coalicion,
-        arrDistritos: arrDistritos,
-        PPNSeleccionados: PPNSeleccionados
-    }
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Escenario)
+      Nombre: nombreEscenario,
+      Descripcion: descripcionEscenario,
+      Federal: Federal,
+      CandidaturaTipo: CandidaturaTipo,
+      Competencia: Competencia,
+      Coalicion: Coalicion,
+      arrDistritos: arrDistritos,
+      PPNSeleccionados: PPNSeleccionados,
     };
-    fetch('http://localhost:3002/api/escenario/save', requestOptions)
-        .then(response => response.json())
-        .then(data => console.log(data));
-  }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Escenario),
+    };
+    fetch("http://localhost:3002/api/escenario/save", requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+    alert("SE GUARDO LA CONFIGURACION ");
+
+    setDistritos([]);
+    setEstado([]);
+    setCompetencia("");
+    setCandidatura("");
+    setPreview(false);
+    setAllStates(false);
+    setDistritosEliminados([]);
+    setPPNSeleccionados([]);
+    setDistritosLocales([]);
+    setMunicipios([]);
+    setPNNLOCALES([]);
+    setCoalicion({
+      nombre: "",
+      Abrev: "",
+    });
+    setPPNView(false);
+    setCandidaturaView(true);
+    setCompetenciaView(false);
+    setGuardar(false);
+    setNombreEscenario("")
+    setDescripcion("")
+  };
   return (
     <div className="w-full h-full p-4 bg-zinc-700">
       {preview == false ? (
@@ -428,6 +451,7 @@ export default function Home() {
                 PPNSeleccionados={PPNSeleccionados}
                 Coalicion={Coalicion}
                 setPPNView={setPPNView}
+                CompetenciaView={competenciaView}
                 View={changePPNView}
               />
               {Competencia != "" ? (
@@ -507,12 +531,15 @@ export default function Home() {
             ) : (
               <></>
             )}
-
+            { CandidaturaTipo == "DF" ? 
             <DistritosFederalesTable
               arrDistritos={arrDistritos}
               onClickEliminar={onClickEliminar}
               arrEstados={arrEstados}
-            />
+            /> :
+            <>
+            </>
+            }
             <DistritosLocalesTable
               distritosLocales={distritosLocales}
               CandidaturaTipo={CandidaturaTipo}
@@ -604,11 +631,12 @@ export default function Home() {
             {guadarValue ? (
               <>
                 <div className="fixed bottom-1/2">
-                  <EscenarioAlert 
-                  setGuardar={setGuardar} 
-                  guardarConfiguracion={guardarConfiguracion}
-                  setNombreEscenario={setNombreEscenario}
-                  setDescripcion={setDescripcion}/>
+                  <EscenarioAlert
+                    setGuardar={setGuardar}
+                    guardarConfiguracion={guardarConfiguracion}
+                    setNombreEscenario={setNombreEscenario}
+                    setDescripcion={setDescripcion}
+                  />
                 </div>
               </>
             ) : (

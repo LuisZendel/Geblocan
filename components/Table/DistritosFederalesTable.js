@@ -41,7 +41,7 @@ export default function DistritosFederalesTable({
             className="border block text-xs w-full p-2 rounded border-2 mt-4"
           >
             <div className="items-center justify-center flex">
-              <h2 className="font-bold my-1.5 ">SELECCIONAR DISTRITOS</h2>
+              <h2 className="font-bold my-1.5 ">DISTRITOS</h2>
             </div>
             <div className=" mb-2  ml-auto flex content-center ">
               <div className="text-xs p-2">
