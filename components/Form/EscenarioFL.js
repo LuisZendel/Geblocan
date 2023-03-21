@@ -1,4 +1,10 @@
-export default function EscenarioFL({ onChangeFederal, Federal, View }) {
+export default function EscenarioFL({
+  onChangeFederal,
+  Federal,
+  View,
+  setBarConfig,
+  setCandidaturaView
+}) {
   return (
     <>
       {View ? (
@@ -27,6 +33,15 @@ export default function EscenarioFL({ onChangeFederal, Federal, View }) {
               type={"radio"}
             />
             <label>LOCAL</label>
+          </div>
+          <div className="felx">
+            <button
+              onClick={() => {
+                setBarConfig(false);
+              }}
+            >
+              Aceptar
+            </button>
           </div>
         </div>
       ) : (

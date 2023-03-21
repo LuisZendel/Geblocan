@@ -6,9 +6,11 @@ export default function EncabezadoTabla({
   onClickEliminar,
   arrEstados,
   escenarioSelected,
+  arrPPN,
 }) {
   useEffect(() => {
     var arraux = [];
+    var arrppnaux = [];
     setContador(SearchEntidades(arrDistritos));
     for (var i = 0; i < arrDistritos.length; i++) {
       arraux = [...arraux, false];
@@ -16,13 +18,15 @@ export default function EncabezadoTabla({
     setNumeroDFAsignados(arrDistritos.length);
     console.log(arrDFAignados);
     setarrDFAsignados(arraux);
-  }, [arrDistritos]);
+    for (var i = 0; i < arrPPN.length; i++) {
+      arrppnaux = [...arrppnaux, 0];
+    }
+    setppnContador(arrppnaux);
+  }, [escenarioSelected]);
   const [serch, setSerch] = useState("");
-  const [contadorppn, setppnContador] = useState("")
+  const [contadorppn, setppnContador] = useState([]);
   const [contadorEntidadesSelect, setContador] = useState(0);
-  const [PRI, SETPRI ] = useState(0)
-  const [PRD, SETPRD] = useState(0)
-  const [PAN, SETPAN] = useState(0)
+
   const filter = (e) => {
     var text = e.target.value;
     setSerch(text);
@@ -45,25 +49,14 @@ export default function EncabezadoTabla({
     }
     return contador;
   };
-  const onChangePPN = (index,e) => {
-    console.log(e.target.value)
-    if(e.target.value == "PRI"){
-      const value = PRI +1
-      SETPRI(value)
-
-    }
-    if(e.target.value == "PAN"){
-      const value = PAN +1
-      SETPAN(value)
-
-    }
-    if(e.target.value == "PRD"){
-      const value = PRD +1
-      SETPRD(value)
-
-    }
+  const onChangePPN = (index, e, indexp) => {
+    var auxcontador = []
     var arraux = [];
     arraux = [...arrDFAignados];
+    auxcontador = [...contadorppn]
+    auxcontador[indexp] = auxcontador[indexp] +1
+    setppnContador(auxcontador)
+    console.log(auxcontador[indexp])
     if (arraux[index] == false) {
       arraux[index] = true;
       const newValue = numeroDFAsignados - 1;
@@ -73,11 +66,26 @@ export default function EncabezadoTabla({
   };
   return (
     <div>
-      <div className="grid grid-cols-2 font-bold mt-5 p-4 border-solid">
-        <div className="">NOMBRE DE ESCENARIO: {escenarioSelected.nombre}</div>
-        <div>DESCRIPCION ESCENARIO: {escenarioSelected.descripcion}</div>
-        <div>PARTIDOS POLITICOS INTEGRANTES: </div>
-        <div>TIPO DE COALICION: FXM</div>
+      <div className="grid grid-cols-2 mt-5 p-4 border-solid">
+        <div className="flex ">
+          <p className="">NOMBRE DE ESCENARIO: </p>
+          <p className="font-bold ml-1 ">{escenarioSelected.nombre}</p></div>
+        <div className="flex">
+          <p>DESCRIPCION ESCENARIO:</p>
+          <p className="font-bold ml-1">{escenarioSelected.descripcion}</p></div>
+        <div className="flex">
+
+          <p>PARTIDOS POLITICOS INTEGRANTES:</p>
+          {arrPPN.map((e, index) => {
+            return (
+              <p 
+                className="ml-1 font-bold"
+              key={index}>
+                {e.Abrev}{" "}
+              </p>
+            );
+          })}
+        </div>
       </div>
       <div className="mt-2">
         <>
@@ -96,7 +104,10 @@ export default function EncabezadoTabla({
                 <p>NUMERO DE DISTRITOS FEDERALES: {arrDistritos.length}</p>
               </div>
               <div className="text-xs p-2">
-                <p>DF POR ASIGNAR: {numeroDFAsignados}</p>
+                <p>DF POR ASIGNAR: {numeroDFAsignados}({(100-(((arrDistritos.length-numeroDFAsignados)*100)/arrDistritos.length)).toFixed(2)}%)</p>
+              </div>
+              <div className="text-xs p-2">
+                <p>COMPLETADO: {arrDistritos.length-numeroDFAsignados}({(((arrDistritos.length-numeroDFAsignados)*100)/arrDistritos.length).toFixed(2)}%)</p>
               </div>
               <FontAwesomeIcon icon={faSearch} className="text-sm ml-auto" />
               <input
@@ -107,34 +118,36 @@ export default function EncabezadoTabla({
                 }}
               />
             </div>
-            <div className="">
-              <div className="relative overflow-x-auto overflow-y-scroll h-96">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
+            <tr className="realtive">
                       <th scope="col" className="px-6 py-3">
-                        Estado
+                        Estado __________
                       </th>
                       <th scope="col" className="px-6 py-3">
                         Distrito
                       </th>
-                      <th scope="col" className="px-6 py-3">
-                        Cabecera
+                      <th scope="col" className="px-6 py-3 mr-4 ">
+                      ________________Cabecera__________
                       </th>
-                      <th scope="col" className="px-6 py-3">
-                        PRI{" "}{PRI}
+                      <th>
+                        Indigena
                       </th>
-                      <th scope="col" className="px-6 py-3">
-                        PAN{" "}{PAN}
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        PRD{" "}{PRD}
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        TOTAL
-                      </th>
+                      {arrPPN.map((p, indexp) => {
+                        return (
+                          <th scope="col" className="px-6 py-3" key={p.Abrev}>
+                            {p.Abrev}( {contadorppn[indexp]})
+                          </th>
+                        );
+                      })}
                     </tr>
-                  </thead>
+                    </thead>
+              
+                    </table>
+            <div className="">
+              <div className="relative overflow-x-auto overflow-y-scroll h-96">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                 
                   <tbody>
                     {arrDistritos
                       .filter((e, index) => {
@@ -160,39 +173,25 @@ export default function EncabezadoTabla({
                             </th>
                             <td className="px-4 ">{x.IDDTOFED}</td>
                             <td className="px-4 ">{x.CABECERA}</td>
-                            <td scope="col" className="px-6 ">
-                              <input
-                              value={"PRI"}
-                                name={x.IDDTOFED + x.CABECERA}
-                                onChange={(e) => {
-                                  onChangePPN(index,e);
-                                }}
-                                type={"radio"}
-                              />
-                            </td>
-                            <td scope="col" className="px-6">
-                              <input
-                              value={"PAN"}
-                                name={x.IDDTOFED + x.CABECERA}
-                                onChange={(e) => {
-                                  onChangePPN(index,e);
-                                }}
-                                type={"radio"}
-                              />
-                            </td>
-                            <td scope="col" className="px-6 ">
-                              <input
-                              value={"PRD"}
-                                name={x.IDDTOFED + x.CABECERA}
-                                onChange={(e) => {
-                                  onChangePPN(index,e);
-                                }}
-                                type={"radio"}
-                              />
-                            </td>
-                            <td scope="col" className="px-6 ">
-                              0
-                            </td>
+                            <td className="px-4">
+                        {x.NTIPOINDIG == 1 ? "SI" : "NO"}
+                        </td>
+                          <>
+                            {arrPPN.map((p,indexp) => {
+                              return (
+                                <td scope="col" className="px-6 " key={p.Abrev}>
+                                  <input
+                                    value={p.Abrev}
+                                    name={x.IDDTOFED + x.CABECERA}
+                                    onChange={(e) => {
+                                      onChangePPN(index, e, indexp);
+                                    }}
+                                    type={"radio"}
+                                  />
+                                </td>
+                              );
+                            })}
+                            </>
                           </tr>
                         );
                       })}

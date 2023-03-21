@@ -11,13 +11,15 @@ export default function BarConfiguration({
   setCandidaturaView,
   setCompetenciaView,
   setPPNView,
-  setPPNSeleccionados
+  setPPNSeleccionados,
+  marco,
+  setChangeMarcoView
 }) {
   return (
     <div className=" p-3 border-solid border-2 mb-3 fixed top-0 left-0 right-0 bg-white ml-4 mr-4 rounded p-2">
       <div className="grid grid-cols-4 text-xs">
         <div className="flex py-1">
-        <div className="mr-1">
+        <div className="mr-1 w-2">
             <FontAwesomeIcon
               icon={faCog}
               onClick={(e) => {
@@ -25,8 +27,8 @@ export default function BarConfiguration({
               }}
             />
           </div>
-          <div className="font-bold">ESCENARIO: </div>
-          {Federal != "" ? <>{Federal == "F" ? " Federal " : " Local "}</> : ""}
+          <div className="text-xs ml-1">ESCENARIO: </div>
+          {Federal != "" ? <p className="font-bold ml-1">{Federal == "F" ? " FEDERAL " : " LOCAL "}</p> : ""}
         </div>
         <div className=" flex py-1">
         <div className="mr-1 ">
@@ -37,9 +39,9 @@ export default function BarConfiguration({
               }}
             />
           </div>
-          <div className="font-bold">TIPO COMPETENCIA: </div>
+          <div className="">TIPO COMPETENCIA: </div>
           {CandidaturaTipo != "" ? (
-            <>{CandidaturaTipo == "DF" ? " Diputados Federales" : "Senador"}</>
+            <p className="font-bold ml-1">{CandidaturaTipo == "DF" ? " DIPUTADOS FEDERALES" : "SENADOR"}</p>
           ) : (
             ""
           )}{" "}
@@ -54,25 +56,25 @@ export default function BarConfiguration({
               }}
             />
           </div>
-          <div className="font-bold">CANDIDATURA: {" "}</div>
+          <div className="">CANDIDATURA:</div>
           {Competencia != "" ? (
-            <>{Competencia == "C" ? " Coalicion" : " Solo"}</>
+            <p className="font-bold ml-1">{Competencia == "C" ? " COALICION" : " SOLO"}</p>
           ) : (
             ""
           )}
         </div>
         {Coalicion.nombre != "" ? (
           <div className="flex  ">
-            <div className="font-bold">COALICION NOMBRE:</div>
-            <div className="text-xs">{Coalicion.nombre}</div>
+            <div className="">COALICION NOMBRE:</div>
+            <div className="text-xs font-bold ml-1">{Coalicion.nombre}</div>
           </div>
         ) : (
           ""
         )}
         {Coalicion.Abrev != "" ? (
           <div className="flex ">
-            <div className="font-bold">ABREVIATURA:</div>
-            <div className="text-xs">{Coalicion.Abrev}</div>
+            <div className="">ABREVIATURA:</div>
+            <div className="text-xs font-bold ml-1">{Coalicion.Abrev}</div>
           </div>
         ) : (
           ""
@@ -87,18 +89,28 @@ export default function BarConfiguration({
               }}
             />
             </div>
-          <div className="font-bold ">PPN SELECCIONADOS: </div>
+          <div className="">PPN SELECCIONADOS: </div>
           {PPNSeleccionados.map((e, index) => {
-            console.log("PPNNNNNN");
-            console.log(e);
             return (
-              <div key={index}>
-                {" "}
+              <div
+              className="ml-1 font-bold "
+              key={index}>
                 {e}
-                {" ,"}
               </div>
             );
           })}
+        </div>
+        <div className="flex py-1">
+        <div className="mr-1 w-2">
+            <FontAwesomeIcon
+              icon={faCog}
+              onClick={(e) => {
+                setChangeMarcoView(true);
+              }}
+            />
+          </div>
+          <div className="text-xs ml-1">MARCO FEDERAL: </div>
+          {Federal != "" ? <p className="font-bold ml-1">{marco == 1 ? " 2023 " : "2017 "}</p> : ""}
         </div>
       </div>
     </div>

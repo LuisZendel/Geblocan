@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 import DistritosFederalesTable from "@/components/Table/DistritosFederalesTable";
 import arrEstados from "../../public/index.json";
 import EncabezadoTabla from "@/components/Encabezado/EncabezadoTabla";
+import PPPNSelect from "@/components/Form/PPNSelect";
 
 export default function ShowEscenario() {
   useEffect(() => {
     fetch("http://localhost:3002/api/escenario/get")
       .then((res) => res.json())
-      .then((data) => setArrEscenarios(data));
-    fetch("http://localhost:3002/api/escenario/get/id?id=9")
-      .then((res) => res.json())
       .then((data) => {
-        setDistritos(data);
+        setArrEscenarios(data);
+        console.log("new data", data);
       });
   }, []);
 
@@ -25,17 +24,22 @@ export default function ShowEscenario() {
   });
   const [serch, setSearch] = useState("");
   const [arrDistritos, setDistritos] = useState([]);
+  const [arrPPN, setPPN] = useState([]);
 
   const getEscenario = (id) => {
-    fetch("http://localhost:3002/api/escenario/get/info/select")
-    .then((res) => res.json)
-    .then((x) => {
-      console.log(x);
-      console.log("*******");
-      setEscenarioSelected(x);
-    });
-    console.log(id)
-  }
+    fetch("http://localhost:3002/api/escenario/get/info/select/id?id=" + id)
+      .then((res) => res.json())
+      .then((data) => {
+        setEscenarioSelected(data[0]);
+        setPPN(data[1]);
+      });
+    fetch("http://localhost:3002/api/escenario/get/id?id=" + id)
+      .then((res) => res.json())
+      .then((data) => {
+        setDistritos(data);
+      });
+    console.log(arrPPN);
+  };
   return (
     <div className="w-full h-full p-4 bg-zinc-700">
       <div className="w-full h-full bg-gray-100 rounded p-4 mt-10">
@@ -54,12 +58,15 @@ export default function ShowEscenario() {
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
+                <th className="px-6 py-3">ID</th>
                 <th scope="col" className="px-6 py-3">
                   NOMBRE
                 </th>
                 <th scope="col" className="px-6 py-3">
                   DESCRIPCION
                 </th>
+                <th>ENTIDADES EN COALICION</th>
+                <th>ENTIDADES SOLO</th>
                 <th scope="col" className="px-6 py-3">
                   FECHA
                 </th>
@@ -85,19 +92,30 @@ export default function ShowEscenario() {
                           : "bg-slate-200 border-b dark:bg-gray-800 dark:border-gray-700 text-xs"
                       }
                     >
+                      <th className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <button
+                          onClick={(e) => {
+                            getEscenario(x.ID);
+                          }}
+                        >
+                          {x.ID}
+                        </button>
+                      </th>
                       <th
                         scope="row"
                         className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        <button 
-                            onClick={(e)=>{
-                                getEscenario(x.idescenario)
-                            }}
+                        <button
+                          onClick={(e) => {
+                            getEscenario(x.idescenario);
+                          }}
                         >
-                        {x.nombre}
+                          {x.nombre}
                         </button>
                       </th>
                       <td className="px-4 ">{x.descripcion}</td>
+                      <td className="px-4">{x.num}</td>
+                      <td className="px-4">{300 - x.num}</td>
                       <td className="px-4 ">{x.fecha}</td>
                       <td className="px-4 content-center justify-center flex">
                         <button
@@ -122,6 +140,7 @@ export default function ShowEscenario() {
               onClickEliminar={() => {}}
               arrEstados={arrEstados}
               escenarioSelected={escenarioSelected}
+              arrPPN={arrPPN}
             />
           </div>
         </div>

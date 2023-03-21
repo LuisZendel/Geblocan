@@ -73,6 +73,9 @@ export default function DistritosFederalesTable({
                       <th scope="col" className="px-6 py-3">
                         Cabecera
                       </th>
+                      <th>
+                        Indigena
+                      </th>
                       <th scope="col" className="px-6 py-3">
                         Opciones
                       </th>
@@ -103,6 +106,7 @@ export default function DistritosFederalesTable({
                             </th>
                             <td className="px-4 ">{x.IDDTOFED}</td>
                             <td className="px-4 ">{x.CABECERA}</td>
+                            <td className="px-4">{x.NTIPOINDIG == 1 ? "SI": ""}</td>
                             <td className="px-4 content-center justify-center flex">
                               <button
                                 onClick={(e, index) => {

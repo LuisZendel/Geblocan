@@ -12,6 +12,7 @@ import DistritosFederalesTable from "@/components/Table/DistritosFederalesTable"
 import SelectEstados from "@/components/Form/SelectEstados";
 import BarConfiguration from "@/components/Form/BarConfiguration";
 import EscenarioAlert from "@/components/Alert/EscenarioAlert";
+import ChangeMarco from "@/components/Form/ChangeMarco";
 export default function Home() {
   const [Federal, setFederal] = useState("");
   const [CandidaturaTipo, setCandidatura] = useState("");
@@ -36,6 +37,8 @@ export default function Home() {
   const [guadarValue, setGuardar] = useState(false);
   const [nombreEscenario, setNombreEscenario] = useState("");
   const [descripcionEscenario, setDescripcion] = useState("");
+  const [marco, setMarco] = useState(1)
+  const [changeMarcoView, setChangeMarcoView] = useState(true);
   const [Coalicion, setCoalicion] = useState({
     nombre: "",
     Abrev: "",
@@ -55,6 +58,7 @@ export default function Home() {
   const onClickCheckAllStates = () => {
     var x;
     x = !checkAllStates;
+    var url = ""
     setAllStates(x);
     if (checkAllStates == true) {
       console.log("ELIMINAR DISTRITOS");
@@ -65,9 +69,15 @@ export default function Home() {
       for (var i = 0; i < 32; i++) {
         arrFalse = [...arrFalse, true];
       }
+      if(marco == "0"){
+        url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=100"
+      }
+      if(marco == "1"){
+        url = "http://localhost:3002/api/distritos/get/id?id=100"
+      }
       setAllStatesArr(arrFalse);
       console.log(checkAllStatesArr);
-      fetch("http://localhost:3002/api/distritos/get/id?id=100")
+      fetch(url)
         .then((data) => data.json())
         .then((data) => {
           console.log(data);
@@ -145,6 +155,7 @@ export default function Home() {
       nombre: "",
       Abrev: "",
     });
+    setPPNView(true)
     resetArr();
     setCompetencia(e.target.value);
   };
@@ -167,7 +178,19 @@ export default function Home() {
 
   const insertPPNSeleccionados = (e) => {
     var arr = [];
+    var existente = false
+    arr = [...PPNSeleccionados];
+    
+    for(var i=0; i<arr.length; i++){
+      if(arr[i] == e.target.value){
+        existente = true;
+        arr.splice(i,1)
+        break
+      }
+    }
+    if (existente == false){
     arr = [...PPNSeleccionados, e.target.value];
+    }
     setPPNSeleccionados(arr);
   };
 
@@ -199,10 +222,18 @@ export default function Home() {
     arr = [...checkAllStatesArr];
     const newValue = !arr[index];
     arr[index] = newValue;
+    var url = ""
+    if(marco == "0"){
+      url = "http://localhost:3002/api/escenario/get/dis/2017/id?id="
+    }
+    if(marco == "1"){
+      url = "http://localhost:3002/api/distritos/get/id?id="
+
+    }
     setAllStatesArr(arr);
     if (newValue == true) {
       const id = index + 1;
-      fetch("http://localhost:3002/api/distritos/get/id?id=" + id)
+      fetch(url + id)
         .then((data) => data.json())
         .then((data) => {
           console.log(data);
@@ -327,13 +358,21 @@ export default function Home() {
     const newValue = !preview;
     console.log(newValue);
     var contador = 0;
+    var url = ""
+    if(marco == "0"){
+      url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=100"
+    }
+    if(marco == "1"){
+      url = "http://localhost:3002/api/distritos/get/id?id=100"
+    }
     checkAllStatesArr.map((e) => {
       if (e == true) {
         contador++;
       }
     });
+
     if (contador < 32) {
-      fetch("http://localhost:3002/api/distritos/get/id?id=100")
+      fetch(url)
         .then((data) => data.json())
         .then((data) => {
           console.log("SHOW DATA");
@@ -417,6 +456,8 @@ export default function Home() {
             setCompetenciaView={setCompetenciaView}
             setPPNView={setPPNView}
             setPPNSeleccionados={setPPNSeleccionados}
+            marco={marco}
+            setChangeMarcoView={setChangeMarcoView}
           />
           <div className="w-full h-full bg-gray-100 rounded p-4 mt-10">
             <div className="">
@@ -425,12 +466,14 @@ export default function Home() {
                   onChangeFederal={onChangeFederal}
                   Federal={Federal}
                   View={ChangeBarconfig}
+                  setBarConfig={setBarConfig}
                 />
                 <Candidatura
                   onChangeCandidatura={onChangeCandidatura}
                   Federal={Federal}
                   Candidatura={CandidaturaTipo}
                   View={candidaturaView}
+                  setCandidaturaView={setCandidaturaView}
                 />
                 <CompetenciaForm
                   onChangeCoalicion={onChangeCoalicion}
@@ -458,6 +501,8 @@ export default function Home() {
                 <>
                   {Federal == "F" ? (
                     <>
+                    <ChangeMarco setMarco={setMarco} setChangeMarcoView={setChangeMarcoView}
+                    changeMarcoView={changeMarcoView} marco={marco}/>
                       <SelectEstados
                         PPNSeleccionados={PPNSeleccionados}
                         onClickCheckAllStates={onClickCheckAllStates}
@@ -467,6 +512,9 @@ export default function Home() {
                         checkAllStates={checkAllStates}
                         checkAllStatesArr={checkAllStates}
                         setDistritos={setDistritos}
+                        setMarco={setMarco}
+                        setChangeMarcoView={setChangeMarcoView}
+                        changeMarcoView={changeMarcoView}
                       />
                     </>
                   ) : (
@@ -676,6 +724,7 @@ export default function Home() {
           contadorEntidadesSeleccionadas={contadorEntidadesSeleccionadas}
           arrEstados={arrEstados}
           setPreview={setPreview}
+          Competencia={Competencia}
         />
       ) : (
         <></>

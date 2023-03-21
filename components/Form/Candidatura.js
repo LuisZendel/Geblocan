@@ -3,6 +3,7 @@ export default function Candidatura({
   Federal,
   Candidatura,
   View,
+  setCandidaturaView,
 }) {
   return (
     <>
@@ -76,6 +77,15 @@ export default function Candidatura({
           ) : (
             <></>
           )}
+          <div className="felx">
+            <button
+              onClick={() => {
+                setCandidaturaView(false);
+              }}
+            >
+              Aceptar
+            </button>
+          </div>
         </div>
       ) : (
         <></>
