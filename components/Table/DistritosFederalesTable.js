@@ -6,32 +6,32 @@ export default function DistritosFederalesTable({
   onClickEliminar,
   arrEstados,
 }) {
-    useEffect(()=>{
-        setContador(SearchEntidades(arrDistritos))
-      },[arrDistritos])
+  useEffect(() => {
+    setContador(SearchEntidades(arrDistritos));
+  }, [arrDistritos]);
   const [serch, setSerch] = useState("");
-  const [contadorEntidadesSelect, setContador] = useState(0)
+  const [contadorEntidadesSelect, setContador] = useState(0);
 
   const filter = (e) => {
     var text = e.target.value;
     setSerch(text);
   };
   const SearchEntidades = (arr) => {
-    var arreglo = []
-    arreglo = [... arr]
+    var arreglo = [];
+    arreglo = [...arr];
     var contador = 0;
-    for(var i=1; i<=32; i++){
-      for(var j=0; j<arr.length; j++ ){
-        if(arreglo[j].IDED == i){
-          console.log("numero entidades")
-          console.log(arreglo[j].IDED, j)
-          contador ++
-          break
+    for (var i = 1; i <= 32; i++) {
+      for (var j = 0; j < arr.length; j++) {
+        if (arreglo[j].IDED == i) {
+          console.log("numero entidades");
+          console.log(arreglo[j].IDED, j);
+          contador++;
+          break;
         }
       }
     }
-    return contador 
-  }
+    return contador;
+  };
   return (
     <>
       {arrDistritos.length > 1 ? (
@@ -67,18 +67,17 @@ export default function DistritosFederalesTable({
                       <th scope="col" className="px-6 py-3">
                         Estado
                       </th>
+                      <th scope="col" className="">
+                        Opciones
+                      </th>
                       <th scope="col" className="px-6 py-3">
                         Distrito
                       </th>
                       <th scope="col" className="px-6 py-3">
                         Cabecera
                       </th>
-                      <th>
-                        Indigena
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Opciones
-                      </th>
+                      <th>Indigena</th>
+                     
                     </tr>
                   </thead>
                   <tbody>
@@ -100,24 +99,26 @@ export default function DistritosFederalesTable({
                           >
                             <th
                               scope="row"
-                              className="px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                              className="px-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
                               {arrEstados[x.IDED - 1].estado}
-                            </th>
-                            <td className="px-4 ">{x.IDDTOFED}</td>
-                            <td className="px-4 ">{x.CABECERA}</td>
-                            <td className="px-4">{x.NTIPOINDIG == 1 ? "SI": ""}</td>
-                            <td className="px-4 content-center justify-center flex">
+                            </th>{" "}
+                            <td className="content-center ">
                               <button
                                 onClick={(e, index) => {
-                                  console.log("boton eliminar")
-                                  console.log(x.IDSAB2023)
-                                  var numero = x.IDSAB2023
+                                  console.log("boton eliminar");
+                                  console.log(x.IDSAB2023);
+                                  var numero = x.IDSAB2023;
                                   onClickEliminar(numero, index);
                                 }}
                               >
                                 <FontAwesomeIcon icon={faTrash} />
                               </button>
+                            </td>
+                            <td className=" justify-center flex">{x.IDDTOFED}</td>
+                            <td className=" ">{x.CABECERA}</td>
+                            <td className="">
+                              {x.NTIPOINDIG == 1 ? "SI" : ""}
                             </td>
                           </tr>
                         );

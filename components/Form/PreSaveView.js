@@ -84,15 +84,15 @@ export default function PreSaveView({
                   Estado
                 </th>
                 <th scope="col" className="px-2 py-2">
+                  Opciones
+                </th>
+                <th scope="col" className="px-2 py-2">
                   Distrito
                 </th>
                 <th scope="col" className="px-2 py-2">
                   Cabecera
                 </th>
                 <th>Indigena</th>
-                <th scope="col" className="px-2 py-2">
-                  Opciones
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -118,9 +118,6 @@ export default function PreSaveView({
                       >
                         {arrEstados[x.IDED - 1].estado}
                       </th>
-                      <td className="px-4 ">{x.IDDTOFED}</td>
-                      <td className="px-4 ">{x.CABECERA}</td>
-                      <td className="px-4">{x.NTIPOINDIG == 1 ? "SI" : ""}</td>
                       <td className="px-4 content-center justify-center flex">
                         <button
                           onClick={(e) => {
@@ -133,6 +130,9 @@ export default function PreSaveView({
                           <FontAwesomeIcon icon={faTrash} />
                         </button>
                       </td>
+                      <td className="px-4 ">{x.IDDTOFED}</td>
+                      <td className="px-4 ">{x.CABECERA}</td>
+                      <td className="px-4">{x.NTIPOINDIG == 1 ? "SI" : ""}</td>
                     </tr>
                   );
                 })}
@@ -167,15 +167,15 @@ export default function PreSaveView({
                     Estado
                   </th>
                   <th scope="col" className="px-2 py-2">
+                    Opciones
+                  </th>
+                  <th scope="col" className="px-2 py-2">
                     Distrito
                   </th>
                   <th scope="col" className="px-2 py-2">
                     Cabecera
                   </th>
                   <th>Indigena</th>
-                  <th scope="col" className="px-2 py-2">
-                    Opciones
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -201,11 +201,6 @@ export default function PreSaveView({
                         >
                           {arrEstados[x.IDED - 1].estado}
                         </th>
-                        <td className="px-4 ">{x.IDDTOFED}</td>
-                        <td className="px-4 ">{x.CABECERA}</td>
-                        <td className="px-4">
-                          {x.NTIPOINDIG == 1 ? "SI" : ""}
-                        </td>
                         <td className="px-4 content-center justify-center flex">
                           <button
                             onClick={(e, index) => {
@@ -214,6 +209,11 @@ export default function PreSaveView({
                           >
                             <FontAwesomeIcon icon={faCheck} />
                           </button>
+                        </td>
+                        <td className="px-4 ">{x.IDDTOFED}</td>
+                        <td className="px-4 ">{x.CABECERA}</td>
+                        <td className="px-4">
+                          {x.NTIPOINDIG == 1 ? "SI" : ""}
                         </td>
                       </tr>
                     );

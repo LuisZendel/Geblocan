@@ -37,7 +37,7 @@ export default function Home() {
   const [guadarValue, setGuardar] = useState(false);
   const [nombreEscenario, setNombreEscenario] = useState("");
   const [descripcionEscenario, setDescripcion] = useState("");
-  const [marco, setMarco] = useState(1)
+  const [marco, setMarco] = useState(1);
   const [changeMarcoView, setChangeMarcoView] = useState(true);
   const [Coalicion, setCoalicion] = useState({
     nombre: "",
@@ -58,7 +58,7 @@ export default function Home() {
   const onClickCheckAllStates = () => {
     var x;
     x = !checkAllStates;
-    var url = ""
+    var url = "";
     setAllStates(x);
     if (checkAllStates == true) {
       console.log("ELIMINAR DISTRITOS");
@@ -69,11 +69,11 @@ export default function Home() {
       for (var i = 0; i < 32; i++) {
         arrFalse = [...arrFalse, true];
       }
-      if(marco == "0"){
-        url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=100"
+      if (marco == "0") {
+        url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=100";
       }
-      if(marco == "1"){
-        url = "http://localhost:3002/api/distritos/get/id?id=100"
+      if (marco == "1") {
+        url = "http://localhost:3002/api/distritos/get/id?id=100";
       }
       setAllStatesArr(arrFalse);
       console.log(checkAllStatesArr);
@@ -155,7 +155,7 @@ export default function Home() {
       nombre: "",
       Abrev: "",
     });
-    setPPNView(true)
+    setPPNView(true);
     resetArr();
     setCompetencia(e.target.value);
   };
@@ -178,20 +178,30 @@ export default function Home() {
 
   const insertPPNSeleccionados = (e) => {
     var arr = [];
-    var existente = false
+    var existente = false;
+    var arrfinal = [];
     arr = [...PPNSeleccionados];
-    
-    for(var i=0; i<arr.length; i++){
-      if(arr[i] == e.target.value){
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] == e.target.value) {
         existente = true;
-        arr.splice(i,1)
-        break
+        arr.splice(i, 1);
+        break;
       }
     }
-    if (existente == false){
-    arr = [...PPNSeleccionados, e.target.value];
+    if (existente == false) {
+      arr = [...PPNSeleccionados, e.target.value];
     }
-    setPPNSeleccionados(arr);
+
+    for(var i=0; i<arrPPN.length; i++){
+      for(var j=0; j<arr.length; j++){
+        if(arrPPN[i].Abrev == arr[j]){
+          arrfinal = [... arrfinal, arrPPN[i].Abrev]
+        }
+      }
+
+    }
+    setPPNSeleccionados(arrfinal);
   };
 
   const onChangeAyuntamiento = () => {
@@ -222,13 +232,12 @@ export default function Home() {
     arr = [...checkAllStatesArr];
     const newValue = !arr[index];
     arr[index] = newValue;
-    var url = ""
-    if(marco == "0"){
-      url = "http://localhost:3002/api/escenario/get/dis/2017/id?id="
+    var url = "";
+    if (marco == "0") {
+      url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=";
     }
-    if(marco == "1"){
-      url = "http://localhost:3002/api/distritos/get/id?id="
-
+    if (marco == "1") {
+      url = "http://localhost:3002/api/distritos/get/id?id=";
     }
     setAllStatesArr(arr);
     if (newValue == true) {
@@ -358,12 +367,12 @@ export default function Home() {
     const newValue = !preview;
     console.log(newValue);
     var contador = 0;
-    var url = ""
-    if(marco == "0"){
-      url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=100"
+    var url = "";
+    if (marco == "0") {
+      url = "http://localhost:3002/api/escenario/get/dis/2017/id?id=100";
     }
-    if(marco == "1"){
-      url = "http://localhost:3002/api/distritos/get/id?id=100"
+    if (marco == "1") {
+      url = "http://localhost:3002/api/distritos/get/id?id=100";
     }
     checkAllStatesArr.map((e) => {
       if (e == true) {
@@ -438,8 +447,8 @@ export default function Home() {
     setCandidaturaView(true);
     setCompetenciaView(false);
     setGuardar(false);
-    setNombreEscenario("")
-    setDescripcion("")
+    setNombreEscenario("");
+    setDescripcion("");
   };
   return (
     <div className="w-full h-full p-4 bg-zinc-700">
@@ -501,8 +510,12 @@ export default function Home() {
                 <>
                   {Federal == "F" ? (
                     <>
-                    <ChangeMarco setMarco={setMarco} setChangeMarcoView={setChangeMarcoView}
-                    changeMarcoView={changeMarcoView} marco={marco}/>
+                      <ChangeMarco
+                        setMarco={setMarco}
+                        setChangeMarcoView={setChangeMarcoView}
+                        changeMarcoView={changeMarcoView}
+                        marco={marco}
+                      />
                       <SelectEstados
                         PPNSeleccionados={PPNSeleccionados}
                         onClickCheckAllStates={onClickCheckAllStates}
@@ -579,15 +592,15 @@ export default function Home() {
             ) : (
               <></>
             )}
-            { CandidaturaTipo == "DF" ? 
-            <DistritosFederalesTable
-              arrDistritos={arrDistritos}
-              onClickEliminar={onClickEliminar}
-              arrEstados={arrEstados}
-            /> :
-            <>
-            </>
-            }
+            {CandidaturaTipo == "DF" ? (
+              <DistritosFederalesTable
+                arrDistritos={arrDistritos}
+                onClickEliminar={onClickEliminar}
+                arrEstados={arrEstados}
+              />
+            ) : (
+              <></>
+            )}
             <DistritosLocalesTable
               distritosLocales={distritosLocales}
               CandidaturaTipo={CandidaturaTipo}

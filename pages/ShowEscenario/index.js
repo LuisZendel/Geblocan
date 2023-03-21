@@ -114,9 +114,11 @@ export default function ShowEscenario() {
                         </button>
                       </th>
                       <td className="px-4 ">{x.descripcion}</td>
-                      <td className="px-4">{x.num}</td>
-                      <td className="px-4">{300 - x.num}</td>
+                      <td className="px-4">{x.competencia == "Coalicion" ? x.num: "Ninguno"}</td>
+
+                      <td className="px-4">{x.competencia == "Coalicion" ? 300 - x.num: x.num}</td>
                       <td className="px-4 ">{x.fecha}</td>
+
                       <td className="px-4 content-center justify-center flex">
                         <button
                           onClick={(e, index) => {
