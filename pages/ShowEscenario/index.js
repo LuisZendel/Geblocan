@@ -27,6 +27,7 @@ export default function ShowEscenario() {
   const [arrPPN, setPPN] = useState([]);
 
   const getEscenario = (id) => {
+    console.log(id)
     fetch("http://localhost:3002/api/escenario/get/info/select/id?id=" + id)
       .then((res) => res.json())
       .then((data) => {
@@ -65,8 +66,8 @@ export default function ShowEscenario() {
                 <th scope="col" className="px-6 py-3">
                   DESCRIPCION
                 </th>
-                <th>ENTIDADES EN COALICION</th>
-                <th>ENTIDADES SOLO</th>
+                <th>DF EN COALICION</th>
+                <th>DF SOLOS</th>
                 <th scope="col" className="px-6 py-3">
                   FECHA
                 </th>
@@ -107,7 +108,7 @@ export default function ShowEscenario() {
                       >
                         <button
                           onClick={(e) => {
-                            getEscenario(x.idescenario);
+                            getEscenario(x.ID);
                           }}
                         >
                           {x.nombre}
