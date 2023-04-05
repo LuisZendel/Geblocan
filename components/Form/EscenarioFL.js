@@ -26,7 +26,7 @@ export default function EscenarioFL({
             <label>FEDERAL</label>
             <br />
             <input
-              className="ml-2 text-sm font-medium text-gray-900 mr-2 mt-1.5"
+              className="ml-2 text-sm font-medium text-gray-900 mr-2"
               name="federal-radio"
               value="L"
               checked={Federal == "L" ? true : false}
@@ -34,8 +34,9 @@ export default function EscenarioFL({
             />
             <label>LOCAL</label>
           </div>
-          <div className="felx">
+          <div className="flex mt-2">
             <button
+            className="ml-auto mr-auto bg-blue-500 rounded h-6 text-whit"
               onClick={() => {
                 setBarConfig(false);
               }}

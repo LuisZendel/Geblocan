@@ -16,8 +16,8 @@ export default function BarConfiguration({
   setChangeMarcoView
 }) {
   return (
-    <div className=" p-3 border-solid border-2 mb-3 fixed top-0 left-0 right-0 bg-white ml-4 mr-4 rounded p-2">
-      <div className="grid grid-cols-4 text-xs">
+    <div className=" p-3 border-solid border-2 mb-3 fixed top-0 left-52 right-52 bg-white ml-4 mr-4 rounded p-2">
+      <div className="grid grid-cols-3 text-xs">
         <div className="flex py-1">
         <div className="mr-1 w-2">
             <FontAwesomeIcon
@@ -39,9 +39,9 @@ export default function BarConfiguration({
               }}
             />
           </div>
-          <div className="">TIPO COMPETENCIA: </div>
+          <div className="">COMPETENCIA: </div>
           {CandidaturaTipo != "" ? (
-            <p className="font-bold ml-1">{CandidaturaTipo == "DF" ? " DIPUTADOS FEDERALES" : "SENADOR"}</p>
+            <p className="font-bold ml-1">{CandidaturaTipo == "DF" ? " DIPUTADOS" : "SENADOR"}</p>
           ) : (
             ""
           )}{" "}
@@ -56,7 +56,7 @@ export default function BarConfiguration({
               }}
             />
           </div>
-          <div className="">CANDIDATURA:</div>
+          <div className="">COALICION:</div>
           {Competencia != "" ? (
             <p className="font-bold ml-1">{Competencia == "C" ? " COALICION" : " SOLO"}</p>
           ) : (

@@ -10,7 +10,7 @@ export default function Candidatura({
       {View ? (
         <div
           id="select CandidaturaTipo"
-          className="border block text-xs w-32 p-2 rounded border-2 ml-2"
+          className="border block text-xs w-32 p-2 rounded border-2 ml-4"
         >
           <div className="items-center justify-center flex">
             <h2 className="font-bold my-1.5 ">CANDIDATURA</h2>
@@ -37,6 +37,16 @@ export default function Candidatura({
                       type={"radio"}
                     />
                     <label>DIPUTADOS</label>
+                    <div className="flex mt-2">
+                      <button
+                        className="ml-auto mr-auto bg-blue-500 rounded h-6 text-whit"
+                        onClick={() => {
+                          setCandidaturaView(false);
+                        }}
+                      >
+                        Aceptar
+                      </button>
+                    </div>
                   </>
                 ) : (
                   <>
@@ -65,7 +75,16 @@ export default function Candidatura({
                           type={"radio"}
                         />
                         <label>AYUN</label>
-                        <br />
+                        <div className="flex mt-2">
+                          <button
+                            className="ml-auto mr-auto bg-blue-500 rounded h-6 text-whit"
+                            onClick={() => {
+                              setCandidaturaView(false);
+                            }}
+                          >
+                            Aceptar
+                          </button>
+                        </div>
                       </>
                     ) : (
                       <></>
@@ -77,15 +96,6 @@ export default function Candidatura({
           ) : (
             <></>
           )}
-          <div className="felx">
-            <button
-              onClick={() => {
-                setCandidaturaView(false);
-              }}
-            >
-              Aceptar
-            </button>
-          </div>
         </div>
       ) : (
         <></>

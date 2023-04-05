@@ -87,12 +87,12 @@ export default function DistritosFederalesTable({
                         const NOMBREBUSCADOR = serch.toUpperCase();
                         return !NOMBRE.indexOf(NOMBREBUSCADOR);
                       })
-                      .map((x, index) => {
+                      .map((x, index2) => {
                         return (
                           <tr
-                            key={index}
+                            key={index2}
                             className={
-                              index % 2 == 0
+                              index2 % 2 == 0
                                 ? "bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xs"
                                 : "bg-slate-200 border-b dark:bg-gray-800 dark:border-gray-700 text-xs"
                             }
