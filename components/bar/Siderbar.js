@@ -2,7 +2,8 @@ import {
   faBars,
   faSquarePlus,
   faList,
-  faTable
+  faTable,
+  faCog
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
@@ -79,6 +80,19 @@ function Sidebar() {
                 Asignar
               </a>
             </div>
+            <div className="p-4 border-solid border w-3/4 py-2 rounded-lg flex content-center justify-center aling-center ml-auto mr-auto  my-4">
+              <FontAwesomeIcon
+                className="mt-auto mb-auto text-2xl"
+                icon={faCog}
+              />
+              <a
+                className="p-2"
+                href={"http://localhost:3000/Bloques"}
+                onClick={handleAssignBlocks}
+              >
+                Config
+              </a>
+            </div>
           </div>
         ) : (
           <div className=" text-xs">
@@ -109,6 +123,16 @@ function Sidebar() {
               <FontAwesomeIcon
                 className="mt-auto mb-auto"
                 icon={faList}
+              />
+            </a>
+            <a
+              href={"/Configuracion"}
+              onClick={handleAssignBlocks}
+              className="p-4 border-solid border w-3/4 py-2 rounded-lg flex content-center justify-center aling-center ml-auto mr-auto  my-4 text-2xl"
+            >
+              <FontAwesomeIcon
+                className="mt-auto mb-auto"
+                icon={faCog}
               />
             </a>
           </div>
