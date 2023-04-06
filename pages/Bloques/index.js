@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
-import PPPNSelect from "@/components/Form/PPNSelect";
 import Sidebar from "@/components/bar/Siderbar";
-import { icon } from "@fortawesome/fontawesome-svg-core";
-import { NumeroBloques } from "@/settings/config";
+import { Numero } from "./../../settings/config";
 export default function Bloques() {
   const [arr, setArr] = useState([]);
   const [names, setNames] = useState([]);
@@ -554,9 +552,9 @@ export default function Bloques() {
                             <tr
                               key={index2}
                               className={
-                                e.NP2 < arr.length / NumeroBloques + 1
+                                e.NP2 < arr.length / Numero + 1
                                   ? "bg-red-400 border-solid border border-2 text-xs"
-                                  : e.NP2 < (arr.length / NumeroBloques) * 2 + 1
+                                  : e.NP2 < (arr.length / Numero) * 2 + 1
                                   ? "bg-blue-400 border-solid border border-2 text-xs"
                                   : "bg-green-400 border-solid border border-2	text-xs"
                               }

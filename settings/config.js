@@ -1,11 +1,13 @@
-module.exports = global.config = {
-    i18n: {
-        welcome: {
-            en: "Welcome",
-            fa: "خوش آمدید"
-        }
-        // rest of your translation object
-    },
-    NumeroBloques: 5
-    // other global config variables you wish
+let otro = {
+  valor: 1,
 };
+let NumeroBloques = otro.valor;
+
+const changeValue = (e) => {
+  NumeroBloques = e;
+  otro.valor = e;
+  console.log(NumeroBloques);
+  console.log("Se cambio");
+};
+module.exports = NumeroBloques;
+module.exports = { changeValue };
